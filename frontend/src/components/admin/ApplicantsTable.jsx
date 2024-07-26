@@ -18,12 +18,13 @@ import { toast } from "sonner";
 const shortlistingStatus = ["Accepted", "Rejected"];
 
 const ApplicantsTable = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const { applicants } = useSelector((store) => store.application);
 
   const statusHandler = async (status, id) => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/v1/application/status/${id}/update`,
+        `${apiUrl}/api/v1/application/status/${id}/update`,
         { status },
         {
           withCredentials: true,

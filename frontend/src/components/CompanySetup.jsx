@@ -11,6 +11,7 @@ import { ArrowLeft } from 'lucide-react';
 import useGetCompanyById from '@/hooks/useGetCompanyById';
 
 const CompanySetup = () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const params = useParams();
     useGetCompanyById(params.id); // Fetching company by ID
     const { singleCompany } = useSelector(store => store.company);
@@ -44,7 +45,7 @@ const CompanySetup = () => {
             formData.append('file', input.file);
         }
         try {
-            const res = await axios.put(`http://localhost:8000/api/v1/company/update/${params.id}`, formData, {
+            const res = await axios.put(`${apiUrl}/api/v1/company/update/${params.id}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },

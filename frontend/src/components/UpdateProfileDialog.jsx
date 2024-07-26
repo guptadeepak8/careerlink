@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { toast } from "sonner"
 
 export function UpdateProfileDialog({ open, setOpen }) {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const { authUser, loading } = useSelector(store => store.auth);
     const [input, setInput] = useState({
         fullname: authUser?.fullname,
@@ -51,7 +52,7 @@ export function UpdateProfileDialog({ open, setOpen }) {
 
         try {
             dispatch(setLoading(true));
-            const res = await axios.post("http://localhost:8000/api/v1/user/profile/update", formData, {
+            const res = await axios.post(`${apiUrl}/api/v1/user/profile/update`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

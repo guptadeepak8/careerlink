@@ -12,6 +12,7 @@ import { setLoading } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
 
 const Singup = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [input, setInput] = useState({
     fullname: "",
     email: "",
@@ -45,7 +46,7 @@ const Singup = () => {
     try {
       dispatch(setLoading(true));
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/register",
+        `${apiUrl}/api/v1/user/register`,
         formData,
         {
           headers: {

@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 
 const Applicants = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const params = useParams();
   const id = params.id;
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Applicants = () => {
       try {
         axios.defaults.withCredentials = true;
         const res = await axios.get(
-          `http://localhost:8000/api/v1/application/${id}/applicants`
+          `${apiUrl}/api/v1/application/${id}/applicants`
         );
         if (res.data.success) {
           dispatch(setAllApplicants(res.data.job));

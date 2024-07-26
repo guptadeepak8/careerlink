@@ -4,12 +4,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const useGetCompanies = () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const dispatch = useDispatch();
     useEffect(() => {
         const fetchCompany = async () => {
             try {
                 axios.defaults.withCredentials = true;
-                const res = await axios.get("http://localhost:8000/api/v1/company/getcompany");
+                const res = await axios.get(`${apiUrl}/api/v1/company/getcompany`);
                 dispatch(setCompanies(res.data.companies));
             } catch (error) {
                 console.log(error);

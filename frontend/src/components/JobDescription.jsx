@@ -8,6 +8,7 @@ import { setSingleJobById } from '@/redux/jobSlice';
 import { useParams } from 'react-router-dom';
 
 const JobDescription = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const { singleJobById } = useSelector(store => store.job);
   const { authUser } = useSelector(store => store.auth);
 
@@ -20,7 +21,7 @@ const JobDescription = () => {
   const applyJobHandler = async () => {
     try {
       axios.defaults.withCredentials = true;
-      const res = await axios.get(`http://localhost:8000/api/v1/application/apply/${params.id}`);
+      const res = await axios.get(`${apiUrl}/api/v1/application/apply/${params.id}`);
       if (res.data.success) {
         setIsApplied(true); // Update the local state
         const updatedJob = { ...singleJobById, applications: [...singleJobById.applications, { applicant: authUser._id }] };
@@ -37,7 +38,7 @@ const JobDescription = () => {
     const fetchSingleJob = async () => {
       try {
         axios.defaults.withCredentials = true;
-        const res = await axios.get(`http://localhost:8000/api/v1/job/${params.id}`);
+        const res = await axios.get(`${apiUrl}/api/v1/job/${params.id}`);
         if (res.data.success) {
           dispatch(setSingleJobById(res.data.job));
           setIsApplied(res.data.job.applications.some(application => application.applicant === authUser?._id)); // Ensure the state is in sync with fetched data

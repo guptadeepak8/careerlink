@@ -19,7 +19,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
 const CreateJobs = () => {
-
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [input, setInput] = useState({
     title: "",
     description: "",
@@ -50,7 +50,7 @@ const CreateJobs = () => {
     try {
       dispatch(setLoading(true));
       const res = await axios.post(
-        `http://localhost:8000/api/v1/job/postjob`,
+        `${apiUrl}/api/v1/job/postjob`,
         input,
         {
           headers: {

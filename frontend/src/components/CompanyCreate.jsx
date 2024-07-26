@@ -10,6 +10,7 @@ import { setSingleCompany } from '@/redux/companySlice'
 import { useNavigate } from 'react-router-dom'
 
 const CompanyCreate = () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const [companyName, setCompanyName] = useState("");
     const [disable, setDisable] = useState(true);
 
@@ -18,7 +19,7 @@ const CompanyCreate = () => {
 
     const createNewCompany = async () => {
         try {
-            const res = await axios.post("http://localhost:8000/api/v1/company/register", { companyName }, {
+            const res = await axios.post(`${apiUrl}/api/v1/company/register`, { companyName }, {
                 headers: {
                     'Content-Type': 'application/json'
                 },

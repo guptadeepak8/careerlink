@@ -12,6 +12,7 @@ import { setAuthUser, setLoading } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
 
 const Login = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -33,7 +34,7 @@ const Login = () => {
     try {
       dispatch(setLoading(true));
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/login",
+        `${apiUrl}/api/v1/user/login`,
         input,
         {
           headers: {
