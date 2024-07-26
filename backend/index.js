@@ -35,9 +35,6 @@ app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
-app.get("/",(res)=>{
-  res.send('hello world')
-})
 
 app.listen(PORT, () => {
     console.log(`server running at port ${PORT}`);
